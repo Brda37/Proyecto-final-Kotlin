@@ -3,6 +3,7 @@ package com.example.forokotlin.utils
 import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.forokotlin.LogInActivity
 import com.google.firebase.auth.FirebaseAuth
 
 

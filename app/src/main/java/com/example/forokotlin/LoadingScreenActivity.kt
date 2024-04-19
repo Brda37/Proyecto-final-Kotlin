@@ -1,10 +1,9 @@
-package com.example.forokotlin.utils
+package com.example.forokotlin
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.example.forokotlin.R
 
 class LoadingScreenActivity : AppCompatActivity() {
 

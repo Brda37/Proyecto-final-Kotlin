@@ -1,4 +1,4 @@
-package com.example.forokotlin
+package com.example.forokotlin.utils
 
 enum class Status {
     ACTIVE,

@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".utils.LogInActivity">
+    tools:context=".LogInActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView2"
@@ -14,12 +25,12 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="106dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginBottom="66dp"
         app:layout_constraintBottom_toTopOf="@+id/txtLoginEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:lottie_autoPlay="true"
         app:lottie_fileName="login.json"
         app:lottie_imageAssetsFolder="assets"

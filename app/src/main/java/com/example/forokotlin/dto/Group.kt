@@ -1,9 +1,8 @@
 package com.example.forokotlin.dto
 
 import android.annotation.SuppressLint
-import android.widget.EditText
 
-class Group(userUid: String?, name: EditText?, groupDescription: String, name1: Any) {
+class Group {
 
     private var userUid: String? = null
     private var name: String? = null

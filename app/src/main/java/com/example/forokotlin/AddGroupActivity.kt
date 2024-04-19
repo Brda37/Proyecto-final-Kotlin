@@ -1,21 +1,20 @@
-package com.example.forokotlin.utils
+package com.example.forokotlin
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.forokotlin.dto.Group
-import com.example.forokotlin.R
+import com.example.forokotlin.utils.Common
+import com.example.forokotlin.utils.TitleType
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.example.forokotlin.Status
 
 class AddGroupActivity : AppCompatActivity() {
 
@@ -31,6 +30,7 @@ class AddGroupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_group)
+        setSupportActionBar(findViewById(R.id.toolbar))
         setup()
     }
 
@@ -44,13 +44,13 @@ class AddGroupActivity : AppCompatActivity() {
         val btnAddGroup: Button = findViewById(R.id.btnAddGroup)
         common = Common()
         btnAddGroup.setOnClickListener { view ->
-            addGroup(view)
+            addGroup()
         }
         supportActionBar?.title = "Agregar grupo"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun addGroup(view: View) {
+    private fun addGroup() {
         val groupName = name?.text.toString().trim()
         val groupDescription = description?.text.toString().trim()
 
@@ -59,7 +59,7 @@ class AddGroupActivity : AppCompatActivity() {
             return
         }
 
-        val group = Group(userUid, name, groupDescription, Status.ACTIVE)
+        val group = Group()
         val groupRef = databaseReference?.child(userUid ?: "")?.push()
 
         groupRef?.setValue(group)?.addOnCompleteListener { task ->
@@ -68,7 +68,7 @@ class AddGroupActivity : AppCompatActivity() {
                 startActivity(Intent(this, MyGroupsActivity::class.java))
                 finish()
             } else {
-                common?.showAlert(TitleType.ERROR, "Error al agregar el grupo", this) // Usamos la instancia de Common
+                common?.showAlert(TitleType.ERROR, "Error al agregar el grupo", this)
             }
         }
     }
@@ -93,7 +93,7 @@ class AddGroupActivity : AppCompatActivity() {
                 return true
             }
             R.id.logout -> {
-                common?.logout(this) // Usamos la instancia de Common para el logout
+                common?.logout(this)
                 return true
             }
         }

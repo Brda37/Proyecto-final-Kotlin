@@ -10,13 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.forokotlin.R
 import com.example.forokotlin.dto.Group
 
-class GroupAdapter(private val context: Context, private var groups: MutableList<Group?>?) :
+class GroupAdapter(context: Context, private var groups: MutableList<Group?>?) :
     RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
-    private val inflater: LayoutInflater
-
-    init {
-        inflater = LayoutInflater.from(context)
-    }
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getItemCount(): Int {
         return groups?.size ?: 0
@@ -31,6 +27,7 @@ class GroupAdapter(private val context: Context, private var groups: MutableList
         groups?.let { holder.bindData(it[position]) }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Group>) {
         groups = items.toMutableList()
         notifyDataSetChanged()
@@ -38,8 +35,8 @@ class GroupAdapter(private val context: Context, private var groups: MutableList
 
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView
-        var description: TextView
-        var status: TextView
+        private var description: TextView
+        private var status: TextView
 
         init {
             name = itemView.findViewById(R.id.groupNameTextView)

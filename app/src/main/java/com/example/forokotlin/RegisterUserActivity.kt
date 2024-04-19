@@ -1,14 +1,14 @@
-package com.example.forokotlin.utils
+package com.example.forokotlin
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.forokotlin.R
 import com.example.forokotlin.dto.User
+import com.example.forokotlin.utils.Common
+import com.example.forokotlin.utils.TitleType
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +25,7 @@ class RegisterUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
+        setSupportActionBar(findViewById(R.id.toolbar))
         setup()
     }
 
@@ -43,7 +44,7 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun registerUser() {
         firebaseAuth = FirebaseAuth.getInstance()
-        if (!email!!.text.toString().isEmpty() && !password!!.text.toString().isEmpty()) {
+        if (email!!.text.toString().isNotEmpty() && password!!.text.toString().isNotEmpty()) {
             firebaseAuth!!.createUserWithEmailAndPassword(
                 email!!.text.toString(),
                 password!!.text.toString()

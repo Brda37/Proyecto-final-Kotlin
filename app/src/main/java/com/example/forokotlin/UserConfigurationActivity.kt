@@ -1,14 +1,12 @@
-package com.example.forokotlin.utils
+package com.example.forokotlin
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.example.forokotlin.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -17,6 +15,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.example.forokotlin.utils.Common
+import com.example.forokotlin.utils.TitleType
 
 class UserConfigurationActivity : AppCompatActivity() {
 
@@ -31,6 +30,7 @@ class UserConfigurationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_user_data)
+        setSupportActionBar(findViewById(R.id.toolbar))
         setup()
     }
 
