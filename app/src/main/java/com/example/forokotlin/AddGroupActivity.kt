@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.forokotlin.dto.Group
 import com.example.forokotlin.utils.Common
+import com.example.forokotlin.utils.Status
 import com.example.forokotlin.utils.TitleType
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -43,7 +44,7 @@ class AddGroupActivity : AppCompatActivity() {
         description = findViewById(R.id.groupDescription)
         val btnAddGroup: Button = findViewById(R.id.btnAddGroup)
         common = Common()
-        btnAddGroup.setOnClickListener { view ->
+        btnAddGroup.setOnClickListener {
             addGroup()
         }
         supportActionBar?.title = "Agregar grupo"
@@ -60,6 +61,11 @@ class AddGroupActivity : AppCompatActivity() {
         }
 
         val group = Group()
+        group.setUserUid(userUid)
+        group.setName(groupName)
+        group.setDescription(groupDescription)
+        group.setStatus(Status.ACTIVE.value)
+
         val groupRef = databaseReference?.child(userUid ?: "")?.push()
 
         groupRef?.setValue(group)?.addOnCompleteListener { task ->

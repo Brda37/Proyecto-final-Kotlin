@@ -8,8 +8,6 @@ class User {
     private var email: String? = null
     private var password: String? = null
 
-    fun User() {}
-
     fun getUid(): String? {
         return uid
     }

@@ -39,7 +39,7 @@ class RegisterUserActivity : AppCompatActivity() {
         btnRegister.setOnClickListener {
             registerUser()
         }
-        Common().setTitleActionBar(this, "Registrarse", true, true)
+        Common().setTitleActionBar(this, "Registrarse", Common.SHOW_BACK_BUTTON, Common.SHOW_HOME_BUTTON)
     }
 
     private fun registerUser() {

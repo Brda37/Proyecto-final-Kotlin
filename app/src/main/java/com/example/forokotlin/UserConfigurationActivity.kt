@@ -66,7 +66,7 @@ class UserConfigurationActivity : AppCompatActivity() {
 
         val btnUpdate = findViewById<Button>(R.id.button)
         btnUpdate.setOnClickListener { updateUser() }
-        Common().setTitleActionBar(this, "Configuración", true, true)
+        Common().setTitleActionBar(this, "Configuración", Common.SHOW_BACK_BUTTON, Common.SHOW_HOME_BUTTON)
     }
 
     private fun updateUser() {

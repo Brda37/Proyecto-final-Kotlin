@@ -27,12 +27,6 @@ class GroupAdapter(context: Context, private var groups: MutableList<Group?>?) :
         groups?.let { holder.bindData(it[position]) }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<Group>) {
-        groups = items.toMutableList()
-        notifyDataSetChanged()
-    }
-
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView
         private var description: TextView

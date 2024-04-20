@@ -1,15 +1,7 @@
 package com.example.forokotlin.utils
 
-enum class TitleType {
-    ERROR,
-    SUCCESS,
-    WARNING;
-
-    private var title: String? = null
-    fun setTitle(title: String) {
-        this.title = title
-    }
-    fun getTitle(): String? {
-        return title
-    }
+enum class TitleType(val value: String) {
+    ERROR("Error"),
+    SUCCESS("Éxito"),
+    WARNING("Advertencia")
 }

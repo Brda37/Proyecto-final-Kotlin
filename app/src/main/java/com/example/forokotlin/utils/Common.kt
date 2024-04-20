@@ -8,9 +8,14 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class Common {
+    companion object {
+        const val SHOW_BACK_BUTTON = true
+        const val SHOW_HOME_BUTTON = true
+    }
+
     fun showAlert(titleType: TitleType, message: String?, activity: AppCompatActivity) {
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle(titleType.getTitle())
+        builder.setTitle(titleType.value)
         builder.setMessage(message)
         builder.setPositiveButton("Aceptar", null)
         val dialog = builder.create()

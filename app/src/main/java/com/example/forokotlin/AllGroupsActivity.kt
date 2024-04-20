@@ -39,7 +39,6 @@ class AllGroupsActivity : AppCompatActivity() {
         databaseReference?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val tempGroups: MutableList<Group?> = mutableListOf()
                     for (groupsByUser in snapshot.children) {
                         for (groupSnapshot in groupsByUser.children) {
                             val group: Group? = groupSnapshot.getValue(Group::class.java)
