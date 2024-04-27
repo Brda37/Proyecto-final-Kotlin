@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
-      - name: Run ktlint
+      - name: Run ktlint to check static code analysis
         run: ./gradlew ktlintCheck
 
       - name: Check code formatting with Spotless
