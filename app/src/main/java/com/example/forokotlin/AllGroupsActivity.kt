@@ -47,7 +47,7 @@ class AllGroupsActivity : AppCompatActivity() {
                     }
                     currentUser?.uid?.let { userUid ->
                         groups?.removeIf { group ->
-                            group?.getUserUid().equals(userUid)
+                            group?.getUid().equals(userUid)
                         }
                     }
 
