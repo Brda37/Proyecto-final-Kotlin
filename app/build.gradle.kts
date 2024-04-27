@@ -2,6 +2,14 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("com.diffplug.spotless") version "5.17.1"
+}
+
+spotless {
+    kotlin {
+        ktlint()
+    }
 }
 
 android {

@@ -31,8 +31,8 @@ class GroupTest {
     @Test
     fun testGetUserUid() {
         val uid = "123456"
-        group.setUserUid(uid)
-        assertEquals(uid, group.getUserUid())
+        group.setUid(uid)
+        assertEquals(uid, group.getUid())
     }
 
     @Test

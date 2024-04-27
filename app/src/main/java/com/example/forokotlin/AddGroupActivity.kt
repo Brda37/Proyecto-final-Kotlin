@@ -61,7 +61,7 @@ class AddGroupActivity : AppCompatActivity() {
         }
 
         val group = Group()
-        group.setUserUid(userUid)
+        group.setUid(userUid)
         group.setName(groupName)
         group.setDescription(groupDescription)
         group.setStatus(Status.ACTIVE.value)
