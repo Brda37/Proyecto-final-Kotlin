@@ -4,42 +4,64 @@ package com.example.forokotlin
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.PerformException
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.espresso.util.HumanReadables
-import androidx.test.espresso.util.TreeIterables
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeoutException
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class LoadingScreenActivityTest {
+class MyGroupsActivityTest {
 
     @Rule
     @JvmField
-    var mActivityScenarioRule = ActivityScenarioRule(LoadingScreenActivity::class.java)
+    var mActivityScenarioRule = ActivityScenarioRule(MyGroupsActivity::class.java)
 
     @Test
-    fun loadingScreenActivityTest() {
-        //onView(isRoot()).perform(waitForView(withId(R.id.btnRegister), isDisplayed(), 5000))
+    fun myGroupsActivityTest() {
 
-        val materialButton = onView(
+        val overflowMenuButton = onView(
             allOf(
-                withId(R.id.btnRegister), withText("Registrarse"),
+                withContentDescription("More options"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.toolbar),
+                        2
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        overflowMenuButton.perform(click())
+
+        val materialTextView = onView(
+            allOf(
+                withId(androidx.transition.R.id.title), withText("Configuración"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(androidx.appcompat.R.id.content),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        materialTextView.perform(click())
+
+        val appCompatEditText14 = onView(
+            allOf(
+                withId(R.id.txtAgeUpdate), withText("25"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -50,11 +72,11 @@ class LoadingScreenActivityTest {
                 isDisplayed()
             )
         )
-        materialButton.perform(click())
+        appCompatEditText14.perform(replaceText("26"))
 
-        val appCompatEditText = onView(
+        val appCompatEditText15 = onView(
             allOf(
-                withId(R.id.txtName),
+                withId(R.id.txtAgeUpdate), withText("26"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -65,11 +87,41 @@ class LoadingScreenActivityTest {
                 isDisplayed()
             )
         )
-        appCompatEditText.perform(pressImeActionButton())
+        appCompatEditText15.perform(closeSoftKeyboard())
 
-        val appCompatEditText2 = onView(
+        val appCompatEditText16 = onView(
             allOf(
-                withId(R.id.txtLastname),
+                withId(R.id.txtAgeUpdate), withText("26"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
+                    ),
+                    6
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText16.perform(pressImeActionButton())
+
+        val appCompatEditText17 = onView(
+            allOf(
+                withId(R.id.txtEmailUpdate), withText("espresso@espresso.com"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
+                    ),
+                    3
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText17.perform(pressImeActionButton())
+
+        val materialButton5 = onView(
+            allOf(
+                withId(R.id.button), withText("Actualizar"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -80,103 +132,56 @@ class LoadingScreenActivityTest {
                 isDisplayed()
             )
         )
-        appCompatEditText2.perform(pressImeActionButton())
+        materialButton5.perform(click())
 
-        val appCompatEditText3 = onView(
+        val overflowMenuButton2 = onView(
             allOf(
-                withId(R.id.txtAge),
+                withContentDescription("More options"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    5
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText3.perform(pressImeActionButton())
-
-        val appCompatEditText4 = onView(
-            allOf(
-                withId(R.id.txtRegisterEmail),
-                childAtPosition(
-                    childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    4
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText4.perform(pressImeActionButton())
-
-        val appCompatEditText5 = onView(
-            allOf(
-                withId(R.id.txtRegisterPassword),
-                childAtPosition(
-                    childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText5.perform(pressImeActionButton())
-
-        val materialButton2 = onView(
-            allOf(
-                withId(R.id.btnRegister), withText("Registrarse"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    8
-                ),
-                isDisplayed()
-            )
-        )
-        materialButton2.perform(click())
-
-        val materialButton3 = onView(
-            allOf(
-                withId(android.R.id.button1), withText("Aceptar"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(androidx.appcompat.R.id.buttonPanel),
-                        0
-                    ),
-                    3
-                )
-            )
-        )
-        materialButton3.perform(scrollTo(), click())
-
-        val appCompatImageButton = onView(
-            allOf(
-                withContentDescription("Navigate up"),
-                childAtPosition(
-                    allOf(
                         withId(R.id.toolbar),
-                        childAtPosition(
-                            withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                            1
-                        )
+                        2
                     ),
-                    1
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatImageButton.perform(click())
+        overflowMenuButton2.perform(click())
 
-        val appCompatEditText6 = onView(
+        val materialTextView2 = onView(
             allOf(
-                withId(R.id.txtLoginEmail),
+                withId(androidx.transition.R.id.title), withText("Añadir grupo"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(androidx.appcompat.R.id.content),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        materialTextView2.perform(click())
+
+        val appCompatEditText18 = onView(
+            allOf(
+                withId(R.id.groupName),
+                childAtPosition(
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
+                    ),
+                    2
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText18.perform(replaceText("Nuevo "), closeSoftKeyboard())
+
+        val appCompatEditText19 = onView(
+            allOf(
+                withId(R.id.groupDescription),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -187,26 +192,11 @@ class LoadingScreenActivityTest {
                 isDisplayed()
             )
         )
-        appCompatEditText6.perform(replaceText("espresso@espresso.com"), closeSoftKeyboard())
+        appCompatEditText19.perform(replaceText("Nuevo"), closeSoftKeyboard())
 
-        val appCompatEditText7 = onView(
+        val materialButton7 = onView(
             allOf(
-                withId(R.id.txtLoginEmail), withText("espresso@espresso.com"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText7.perform(pressImeActionButton())
-
-        val appCompatEditText8 = onView(
-            allOf(
-                withId(R.id.txtLoginPassword),
+                withId(R.id.btnAddGroup), withText("Añadir grupo"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
@@ -217,97 +207,97 @@ class LoadingScreenActivityTest {
                 isDisplayed()
             )
         )
-        appCompatEditText8.perform(replaceText("1345678"), closeSoftKeyboard())
+        materialButton7.perform(click())
 
-        val appCompatEditText9 = onView(
+        val overflowMenuButton3 = onView(
             allOf(
-                withId(R.id.txtLoginPassword), withText("1345678"),
+                withContentDescription("More options"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
-                        0
+                        withId(R.id.toolbar),
+                        2
                     ),
-                    4
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatEditText9.perform(click())
+        overflowMenuButton3.perform(click())
 
-        val appCompatEditText10 = onView(
+        val materialTextView3 = onView(
             allOf(
-                withId(R.id.txtLoginPassword), withText("1345678"),
+                withId(androidx.transition.R.id.title), withText("Todos los grupos"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
+                        withId(androidx.appcompat.R.id.content),
                         0
                     ),
-                    4
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatEditText10.perform(replaceText("12345678"))
+        materialTextView3.perform(click())
 
-        val appCompatEditText11 = onView(
+        val overflowMenuButton4 = onView(
             allOf(
-                withId(R.id.txtLoginPassword), withText("12345678"),
+                withContentDescription("More options"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
-                        0
+                        withId(R.id.toolbar),
+                        2
                     ),
-                    4
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatEditText11.perform(closeSoftKeyboard())
+        overflowMenuButton4.perform(click())
 
-        val appCompatEditText12 = onView(
+        val materialTextView4 = onView(
             allOf(
-                withId(R.id.txtLoginPassword), withText("12345678"),
+                withId(androidx.transition.R.id.title), withText("Mis grupos"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
+                        withId(androidx.appcompat.R.id.content),
                         0
                     ),
-                    4
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatEditText12.perform(click())
+        materialTextView4.perform(click())
 
-        val appCompatEditText13 = onView(
+        val overflowMenuButton5 = onView(
             allOf(
-                withId(R.id.txtLoginPassword), withText("12345678"),
+                withContentDescription("More options"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
-                        0
+                        withId(R.id.toolbar),
+                        2
                     ),
-                    4
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatEditText13.perform(pressImeActionButton())
+        overflowMenuButton5.perform(click())
 
-        val materialButton4 = onView(
+        val materialTextView5 = onView(
             allOf(
-                withId(R.id.btnLogin), withText("Iniciar sesión"),
+                withId(androidx.transition.R.id.title), withText("Cerrar sesión"),
                 childAtPosition(
                     childAtPosition(
-                        withId(android.R.id.content),
+                        withId(androidx.appcompat.R.id.content),
                         0
                     ),
-                    5
+                    0
                 ),
                 isDisplayed()
             )
         )
-        materialButton4.perform(click())
+        materialTextView5.perform(click())
     }
 
     private fun childAtPosition(
