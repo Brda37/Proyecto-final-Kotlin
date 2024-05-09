@@ -39,7 +39,12 @@ class RegisterUserActivity : AppCompatActivity() {
         btnRegister.setOnClickListener {
             registerUser()
         }
-        Common().setTitleActionBar(this, "Registrarse", Common.SHOW_BACK_BUTTON, Common.SHOW_HOME_BUTTON)
+        Common().setTitleActionBar(
+            this,
+            "Registrarse",
+            Common.SHOW_BACK_BUTTON,
+            Common.SHOW_HOME_BUTTON
+        )
     }
 
     private fun registerUser() {
@@ -54,7 +59,8 @@ class RegisterUserActivity : AppCompatActivity() {
                         saveUserData()
                         startActivity(Intent(this, LogInActivity::class.java))
                     } else {
-                        Toast.makeText(this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Error al registrar el usuario", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
         } else {
@@ -75,7 +81,8 @@ class RegisterUserActivity : AppCompatActivity() {
         databaseReference.child(uid!!).setValue(user)
             .addOnCompleteListener { task: Task<Void> ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT)
+                        .show()
                 } else {
                     Common().showAlert(TitleType.ERROR, "Error al agregar el grupo", this)
                 }

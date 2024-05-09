@@ -76,6 +76,17 @@
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
+            <Button
+                android:id="@+id/btnJoinGroup"
+                android:layout_width="57dp"
+                android:layout_height="36dp"
+                android:layout_below="@+id/groupStatusTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/joinGroup"
+                android:textSize="12sp" />
+
         </RelativeLayout>
     </LinearLayout>
 

@@ -28,7 +28,12 @@ class LogInActivity : AppCompatActivity() {
         btnRegister.setOnClickListener {
             startActivity(Intent(this, RegisterUserActivity::class.java))
         }
-        Common().setTitleActionBar(this, "Iniciar sesión", Common.SHOW_BACK_BUTTON, Common.SHOW_HOME_BUTTON)
+        Common().setTitleActionBar(
+            this,
+            "Iniciar sesión",
+            Common.SHOW_BACK_BUTTON,
+            Common.SHOW_HOME_BUTTON
+        )
     }
 
     private fun login() {

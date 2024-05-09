@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "fcd5da90-2b54-4832-b90f-ceedfdbab0d4",
+		"name": "Firebase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17674118"
+	},
+	"item": [
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://final-project-forum-9a8f8-default-rtdb.firebaseio.com/Users.json",
+					"protocol": "https",
+					"host": [
+						"final-project-forum-9a8f8-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"Users.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.environment.set(\"id_user\", responseJson.name);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"age\": 20,\r\n    \"email\": \"prueba.prueba@prueba.com\",\r\n    \"lastname\": \"Prueba\",\r\n    \"name\": \"Prueba\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://final-project-forum-9a8f8-default-rtdb.firebaseio.com/Users.json",
+					"protocol": "https",
+					"host": [
+						"final-project-forum-9a8f8-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"Users.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"age\": 20,\r\n    \"email\": \"prueba1.prueba1@prueba.com\",\r\n    \"lastname\": \"Prueba 1\",\r\n    \"name\": \"Prueba 1\",\r\n    \"password\": \"87654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://final-project-forum-9a8f8-default-rtdb.firebaseio.com/Users/{{id_user}}.json",
+					"protocol": "https",
+					"host": [
+						"final-project-forum-9a8f8-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"Users",
+						"{{id_user}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"age\": 20,\r\n    \"email\": \"prueba.prueba@prueba.com\",\r\n    \"lastname\": \"Prueba\",\r\n    \"name\": \"Prueba\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://final-project-forum-9a8f8-default-rtdb.firebaseio.com/Users/{{id_user}}.json",
+					"protocol": "https",
+					"host": [
+						"final-project-forum-9a8f8-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"Users",
+						"{{id_user}}.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -12,7 +12,11 @@ import com.example.forokotlin.utils.Common
 import com.example.forokotlin.utils.GroupAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class MyGroupsActivity : AppCompatActivity() {
 
@@ -32,25 +36,33 @@ class MyGroupsActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         currentUser = firebaseAuth!!.currentUser
         databaseReference = FirebaseDatabase.getInstance().getReference("Groups")
-        databaseReference!!.child(currentUser!!.uid)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        groups = ArrayList()
-                        for (groupSnapshot in snapshot.children) {
+        groups = ArrayList()
+        databaseReference?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (groupsByUser in snapshot.children) {
+                        for (groupSnapshot in groupsByUser.children) {
                             val group: Group? = groupSnapshot.getValue(Group::class.java)
-                            groups!!.add(group)
-                        }
-                        val groupAdapter = GroupAdapter(this@MyGroupsActivity, groups)
-                        val recyclerView: RecyclerView = findViewById(R.id.myGroupsRecyclerView)
-                        recyclerView.setHasFixedSize(true)
-                        recyclerView.layoutManager = LinearLayoutManager(this@MyGroupsActivity)
-                        recyclerView.adapter = groupAdapter
-                    }
-                }
+                            group?.setUid(groupSnapshot.key)
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
+                            if (group?.getUserUid().equals(currentUser?.uid) || group?.getMembers()
+                                    ?.containsKey(currentUser?.uid) == true
+                            ) {
+                                groups?.add(group)
+                            }
+                        }
+                    }
+
+                    val groupAdapter = GroupAdapter(this@MyGroupsActivity, groups, false)
+                    val recyclerView: RecyclerView = findViewById(R.id.myGroupsRecyclerView)
+                    recyclerView.setHasFixedSize(true)
+                    recyclerView.layoutManager = LinearLayoutManager(this@MyGroupsActivity)
+                    recyclerView.adapter = groupAdapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
         supportActionBar?.title = "Mis grupos"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -66,14 +78,17 @@ class MyGroupsActivity : AppCompatActivity() {
                 startActivity(Intent(this, UserConfigurationActivity::class.java))
                 return true
             }
+
             R.id.addGroup -> {
                 startActivity(Intent(this, AddGroupActivity::class.java))
                 return true
             }
+
             R.id.allGroups -> {
                 startActivity(Intent(this, AllGroupsActivity::class.java))
                 return true
             }
+
             R.id.logout -> {
                 Common().logout(this)
                 return true

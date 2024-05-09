@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.forokotlin.utils.Common
+import com.example.forokotlin.utils.TitleType
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -14,8 +16,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.example.forokotlin.utils.Common
-import com.example.forokotlin.utils.TitleType
 
 class UserConfigurationActivity : AppCompatActivity() {
 
@@ -66,7 +66,12 @@ class UserConfigurationActivity : AppCompatActivity() {
 
         val btnUpdate = findViewById<Button>(R.id.button)
         btnUpdate.setOnClickListener { updateUser() }
-        Common().setTitleActionBar(this, "Configuración", Common.SHOW_BACK_BUTTON, Common.SHOW_HOME_BUTTON)
+        Common().setTitleActionBar(
+            this,
+            "Configuración",
+            Common.SHOW_BACK_BUTTON,
+            Common.SHOW_HOME_BUTTON
+        )
     }
 
     private fun updateUser() {
@@ -93,18 +98,22 @@ class UserConfigurationActivity : AppCompatActivity() {
                 startActivity(Intent(this, AddGroupActivity::class.java))
                 true
             }
+
             R.id.allGroups -> {
                 startActivity(Intent(this, AllGroupsActivity::class.java))
                 true
             }
+
             R.id.myGroups -> {
                 startActivity(Intent(this, MyGroupsActivity::class.java))
                 true
             }
+
             R.id.logout -> {
                 Common().logout(this)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

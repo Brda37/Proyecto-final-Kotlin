@@ -26,14 +26,17 @@ class GroupInfoActivity : AppCompatActivity() {
                 startActivity(Intent(this, UserConfigurationActivity::class.java))
                 return true
             }
+
             R.id.addGroup -> {
                 startActivity(Intent(this, AddGroupActivity::class.java))
                 return true
             }
+
             R.id.myGroups -> {
                 startActivity(Intent(this, MyGroupsActivity::class.java))
                 return true
             }
+
             R.id.logout -> {
                 Common().logout(this)
                 return true

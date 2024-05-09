@@ -6,6 +6,7 @@
     <string name="btnRegister">Registrarse</string>
     <string name="btnUpdate">Actualizar</string>
     <string name="btnAddGroup">Añadir grupo</string>
+    <string name="joinGroup">+</string>
 
     <!-- Login -->
     <string name="email">Correo electrónico</string>

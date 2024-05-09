@@ -61,7 +61,7 @@ class AddGroupActivity : AppCompatActivity() {
         }
 
         val group = Group()
-        group.setUid(userUid)
+        group.setUserUid(userUid)
         group.setName(groupName)
         group.setDescription(groupDescription)
         group.setStatus(Status.ACTIVE.value)
@@ -90,14 +90,17 @@ class AddGroupActivity : AppCompatActivity() {
                 startActivity(Intent(this, UserConfigurationActivity::class.java))
                 return true
             }
+
             R.id.allGroups -> {
                 startActivity(Intent(this, AllGroupsActivity::class.java))
                 return true
             }
+
             R.id.myGroups -> {
                 startActivity(Intent(this, MyGroupsActivity::class.java))
                 return true
             }
+
             R.id.logout -> {
                 common?.logout(this)
                 return true
